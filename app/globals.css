@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn.css";
+
+/* Kawe brand palette. Change colours here. */
+@theme {
+  --color-adire: #233a8c;
+  --color-adire-deep: #1a2c6d;
+  --color-adire-soft: #e6ebf8;
+  --color-adire-mist: #afbceb;
+  --color-osun: #e0603a;
+  --color-osun-bright: #f08a5d;
+  --color-osun-deep: #b4441f;
+  --color-osun-soft: #fdeae2;
+  --color-night: #15122e;
+  --color-ink-2: #4a4766;
+  --color-ink-3: #6b6787;
+  --color-cotton: #f7f3ea;
+  --color-line: #e6dfcf;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* shadcn/ui tokens, mapped onto the brand palette above. */
+:root {
+  --radius: 0.75rem;
+  --background: var(--color-cotton);
+  --foreground: var(--color-night);
+  --card: #ffffff;
+  --card-foreground: var(--color-night);
+  --popover: var(--color-cotton);
+  --popover-foreground: var(--color-night);
+  --primary: var(--color-adire);
+  --primary-foreground: var(--color-cotton);
+  --secondary: #ffffff;
+  --secondary-foreground: var(--color-night);
+  --muted: #efe9dc;
+  --muted-foreground: var(--color-ink-3);
+  --accent: var(--color-adire-soft);
+  --accent-foreground: var(--color-adire);
+  --destructive: #c2410c;
+  --border: var(--color-line);
+  --input: var(--color-line);
+  --ring: var(--color-osun);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* Keep section headings clear of the sticky header when jumping to them. */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+::selection {
+  background: var(--color-osun-soft);
+  color: var(--color-night);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
