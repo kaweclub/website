@@ -45,8 +45,8 @@ export const privacy: LegalDocumentContent = {
               <strong>Emails you send us.</strong> If you write to {site.supportEmail}, we keep that conversation.
             </li>
             <li>
-              <strong>Anonymous visit statistics.</strong> Which pages are viewed, roughly where visitors come from, and
-              what device they use. This uses no cookies and can’t identify you.
+              <strong>Anonymous visit and performance statistics.</strong> Which pages are viewed, roughly where visitors
+              come from, what device they use, and how quickly pages load. This uses no cookies and can’t identify you.
             </li>
           </ul>
           <p>This website itself doesn’t set cookies, and we don’t sell or rent your information to anyone.</p>
@@ -83,7 +83,7 @@ export const privacy: LegalDocumentContent = {
               <strong>Zoho Mail</strong> handles our email.
             </li>
             <li>
-              <strong>Vercel</strong> hosts this website and provides the anonymous visit statistics.
+              <strong>Vercel</strong> hosts this website and provides the anonymous visit and performance statistics.
             </li>
             <li>
               <strong>WhatsApp</strong> (Meta), only if you gave us a WhatsApp number and we message you there.

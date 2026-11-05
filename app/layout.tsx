@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { site } from "@/config/site";
 import { themeColor } from "@/lib/brand";
@@ -50,6 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionProvider>{children}</MotionProvider>
         {/* Cookieless page-view stats. Turn on under Project → Analytics in Vercel. */}
         <Analytics />
+        {/* Real-visitor loading speed (Core Web Vitals). Turn on under Project → Speed Insights in Vercel. */}
+        <SpeedInsights />
       </body>
     </html>
   );

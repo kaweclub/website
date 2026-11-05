@@ -10,7 +10,7 @@ export const home: HomeContent = {
       "Track your reading, join a club, and discuss every chapter without spoilers. Kawe keeps everyone’s thoughts hidden until the club is ready, then reveals them all at once.",
     primary: { label: "Join the waitlist", href: site.waitlistUrl },
     secondary: { label: "Help shape Kawe", href: site.surveyUrl },
-    note: "Free to join. No spam, just launch news.",
+    note: "Free to join: a two-minute survey, then just launch news. No spam.",
   },
 
   howItWorks: {

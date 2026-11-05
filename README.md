@@ -91,6 +91,7 @@ Create an empty repository in the `kaweclub` GitHub organisation, then follow Gi
 2. **Add New → Project**, import the repository, and click **Deploy**. No settings to change.
 3. You get a working `*.vercel.app` link straight away.
 4. To see visitor stats, open **Project → Analytics** and click **Enable**. The code is already in place.
+5. To see how fast the site loads for real visitors, open **Project → Speed Insights** and click **Enable**. The code is already in place too.
 
 ## Connect kawe.club (Namecheap)
 
