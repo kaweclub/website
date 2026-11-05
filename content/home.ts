@@ -63,7 +63,7 @@ export const home: HomeContent = {
   theName: {
     id: sections.name,
     eyebrow: "The name",
-    title: "“Ka iwe.” Read a book.",
+    title: { phrase: "Kà iwé", meaning: "Read a book." },
     body: "Kawe comes from Yoruba. Our mark is a K seen from the edge of a book: the stem is the spine, and the two legs are pages, one settled, one mid-turn. The colours come from Yoruba craft too: Adire, the indigo resist-dyed cloth, and Osun, the red-orange of camwood.",
   },
 

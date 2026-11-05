@@ -1,102 +1,86 @@
-# Kawe landing page
+# Kawe
 
-The landing page for **kawe.club**. Built with Next.js, React, Tailwind CSS, shadcn/ui and framer-motion. It is fully static: no database, no backend, nothing to pay for.
+The marketing site for [kawe.club](https://kawe.club), the book club app built around the Blind Reveal.
 
-## Run it locally
+A fully static Next.js site: no backend, no database.
 
-You need **Node.js 22 or newer** (check with `node -v`).
+## Tech stack
+
+- [Next.js](https://nextjs.org) 16 (App Router) and React 19
+- TypeScript
+- [Tailwind CSS](https://tailwindcss.com) 4 and [shadcn/ui](https://ui.shadcn.com) (Base UI primitives)
+- [framer-motion](https://motion.dev) for animation
+- [lucide-react](https://lucide.dev) and [react-icons](https://react-icons.github.io/react-icons/) for icons
+- Vercel Analytics and Speed Insights (cookieless)
+
+## Getting started
+
+Requires Node.js 22 or newer.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open <http://localhost:3000>. Edits to files show up instantly.
+The site runs at <http://localhost:3000>.
 
-## How the code is organised
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build (also type-checks) |
+| `npm run start` | Serve the production build |
 
-Each folder has one job. Words, settings and appearance are kept apart, so you can change the wording without touching layout code, and the other way round.
+## Project structure
+
+Configuration, content and presentation are kept separate. Copy changes happen in `content/`, settings in `config/`, and components receive their content as typed props.
 
 ```text
-app/              Routes only. Each page just puts sections together.
-  page.tsx          Home
-  privacy/page.tsx  Privacy notice
-  not-found.tsx     "Page not found"
-  layout.tsx        Fonts, page title, link previews, analytics
-  globals.css       Brand colours and shadcn theme
-config/site.ts    Links, support email, nav, socials, routes, section ids
-content/          All the wording, as typed data
-  home.ts           Hero, How it works, Features, The name, final call to action
-  mockups.ts        The sample club in the phone mockups
-  privacy.tsx       Privacy notice text
-  layout.ts         Header, menu and footer labels
-  not-found.ts      404 page text
-types/            The shape each config and content file must follow
-lib/              cn() helper and brand colours used in code (SVG fills)
+app/              Routes (home, privacy, 404), root layout, global styles
+config/site.ts    Site settings: URLs, contact, navigation, socials, routes
+content/          All page copy as typed data
+types/            Interfaces for config and content
+lib/              Utilities and brand colour tokens
 components/
-  ui/               shadcn/ui primitives (button, card, badge, sheet, separator)
-  brand/            Mark, Logo, AdirePattern and the shared mark shapes
-  common/           ButtonLink, Container, Eyebrow, SectionTitle, SocialLinks, CurrentYear
-  layout/           PageShell, SiteHeader, SiteFooter, MobileNav
-  motion/           Reveal, Stagger, Float, MotionProvider (framer-motion)
-  mockups/          PhoneFrame, ClubHeader, StatusBadge, CountdownPhone, RevealPhone
-  sections/         Hero, HowItWorks, Features, TheName, CallToAction
-  legal/            LegalDocument: renders any policy page from content
+  ui/             shadcn/ui primitives
+  brand/          Logo, mark and pattern
+  common/         Shared building blocks (buttons, headings, container)
+  layout/         Page shell, header, footer, mobile navigation
+  motion/         Animation wrappers
+  mockups/        Phone mockups
+  sections/       Home page sections
+  legal/          Policy page renderer
 ```
 
-## Where to change things
+## Making changes
 
-| What | File |
+| Change | Location |
 | --- | --- |
-| Waitlist and survey links, support email, nav links, social links | `config/site.ts` |
-| Any wording on the home page | `content/home.ts` |
-| The sample club in the phone mockups | `content/mockups.ts` |
-| Privacy notice | `content/privacy.tsx` (update `lastUpdated` when you change it) |
+| Links, contact email, navigation, socials | `config/site.ts` |
+| Home page copy | `content/home.ts` |
+| Phone mockup data | `content/mockups.ts` |
+| Privacy notice | `content/privacy.tsx` (update `lastUpdated`) |
 | Header, menu and footer labels | `content/layout.ts` |
-| Layout or styling of a home page section | `components/sections/` |
-| Add, remove or reorder home page sections | `app/page.tsx` |
-| Brand colours | `app/globals.css` (the `@theme` block; shadcn's colours are mapped just below it). Colours used in SVG code are in `lib/brand.ts`. |
-| Page title and link previews | `app/layout.tsx`, `app/opengraph-image.png` |
-| Browser tab icon | `app/icon.svg`, `app/apple-icon.png` |
+| Section layout and styling | `components/sections/` |
+| Section order | `app/page.tsx` |
+| Brand colours | `app/globals.css` (`@theme`), and `lib/brand.ts` for SVG fills |
+| Metadata and social preview images | `app/layout.tsx`, `app/opengraph-image.png`, `app/twitter-image.png` |
 
-The X handle used in link previews is read from the X entry in `socials`, so you only change it in one place. Adding a new social platform means adding it to `SocialPlatform` in `types/site.ts`, then giving it an icon in `components/common/SocialLinks.tsx`. TypeScript reports an error if the icon is missing.
+**Adding a social platform:** add it to `SocialPlatform` in `types/site.ts`, then map an icon in `components/common/SocialLinks.tsx`. The build fails if the icon is missing.
 
-Feature card icons are picked by key (e.g. `"tracker"`) in `content/home.ts` and mapped to icons in `components/sections/Features.tsx`.
+**Adding a policy page:** define the content with the `LegalDocumentContent` type in `content/`, then render it with `<LegalDocument>` in a new `app/<name>/page.tsx`.
 
-To add another policy page (e.g. terms), write the text in `content/` using the `LegalDocumentContent` shape, then render it with `<LegalDocument>` in a new `app/<name>/page.tsx`.
+## Conventions
 
-The footer's copyright year updates automatically in the visitor's browser (`components/common/CurrentYear.tsx`), so there's no need to rebuild each January.
+- **Dependencies are pinned to exact versions.** Upgrade with `npm install --save-exact <package>@<version>`.
+- **shadcn components:** add with `npx shadcn@latest add <component>`. The `shadcn` package is not a dependency; the styles its components need live in `app/shadcn.css`.
+- **Motion:** animations respect the visitor's reduced-motion setting. The hero is intentionally static so it renders before JavaScript loads.
+- **Accessibility:** keep the skip link, visible focus styles and touch targets of at least 44px.
+- **Privacy:** the site sets no cookies. If you add a service that handles visitor data, update the privacy notice to match.
 
-To add more shadcn components, run `npx shadcn@latest add <name>`. The `shadcn` package isn't installed in the project; the few styles its components need live in `app/shadcn.css`. If a new component uses a style that's missing, copy it in there. Animations respect the visitor's "reduce motion" setting.
+## Deployment
 
-Package versions are pinned exactly. To upgrade one, run `npm install --save-exact <name>@<version>`.
+The site is hosted on Vercel. Every push to `main` deploys to production, and pull requests get preview deployments. Analytics and Speed Insights are enabled from the Vercel project dashboard.
 
-The **waitlist button** points to the survey, which ends by asking for an email or WhatsApp number. If you later make a separate waitlist form, paste its link into `waitlistUrl` in `config/site.ts`.
+## License
 
-**Privacy:** link to `https://kawe.club/privacy` from the survey's description. If you add a new service that handles visitor data (a newsletter tool, a different form, analytics with cookies), update the privacy notice too.
-
-## Put it on GitHub
-
-```bash
-git init
-git add .
-git commit -m "Kawe landing page"
-```
-
-Create an empty repository in the `kaweclub` GitHub organisation, then follow GitHub's "push an existing repository" commands.
-
-## Deploy free on Vercel
-
-1. Sign in at vercel.com with GitHub (use <admin@kawe.club> for the account).
-2. **Add New → Project**, import the repository, and click **Deploy**. No settings to change.
-3. You get a working `*.vercel.app` link straight away.
-4. To see visitor stats, open **Project → Analytics** and click **Enable**. The code is already in place.
-5. To see how fast the site loads for real visitors, open **Project → Speed Insights** and click **Enable**. The code is already in place too.
-
-## Connect kawe.club (Namecheap)
-
-1. In Vercel: **Project → Settings → Domains**, add `kawe.club` and `www.kawe.club`.
-2. Vercel shows the exact DNS records to add. Typically an **A record** for `@` and a **CNAME** for `www`.
-3. In Namecheap: **Domain List → kawe.club → Advanced DNS → Host Records**, add exactly what Vercel shows, and remove any old parking-page records (often a CNAME for `www` and a URL redirect for `@`).
-4. **Do not touch the MX records or the TXT records** (SPF, DKIM, DMARC, Zoho verification). They run your email.
-5. Wait a few minutes to an hour. Vercel adds HTTPS automatically.
+© Kawe. All rights reserved.

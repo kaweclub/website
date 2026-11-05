@@ -17,5 +17,6 @@ interface SectionTitleProps {
 }
 
 export function SectionTitle({ children, as: Tag = "h2", size = "default", className }: SectionTitleProps) {
-  return <Tag className={cn("font-bold leading-tight", sizes[size], className)}>{children}</Tag>;
+  // `leading-tight` must come after the size: the class merger lets a later font size override an earlier line height.
+  return <Tag className={cn("font-bold", sizes[size], "leading-tight", className)}>{children}</Tag>;
 }

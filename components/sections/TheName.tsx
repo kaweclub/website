@@ -20,7 +20,7 @@ export function TheName({ content }: { content: TheNameContent }) {
             {content.eyebrow}
           </Eyebrow>
           <SectionTitle size="display" className="mt-3">
-            {content.title}
+            “<span lang="yo">{content.title.phrase}</span>.” {content.title.meaning}
           </SectionTitle>
         </Reveal>
         <Reveal delay={0.2}>

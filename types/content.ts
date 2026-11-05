@@ -51,7 +51,8 @@ export interface FeaturesContent {
 export interface TheNameContent {
   id: string;
   eyebrow: string;
-  title: string;
+  /** Rendered as: “<phrase>.” <meaning> — the phrase is marked as Yoruba for screen readers. */
+  title: { phrase: string; meaning: string };
   body: string;
 }
 
